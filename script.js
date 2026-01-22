@@ -1,4 +1,4 @@
-    const DISCORD_ID = '678546996268630056'; 
+const DISCORD_ID = '678546996268630056'; 
 
     async function fetchDiscordStatus() {
         try {
@@ -16,7 +16,7 @@
 
                 document.getElementById('discord-status').className = `status-dot status-${discord_status}`;
 
-                let act = "Just vibeing";
+                let act = "not doing anything right now";
                 if (activities && activities.length > 0) {
                     const game = activities.find(x => x.type !== 4);
                     const custom = activities.find(x => x.type === 4);
