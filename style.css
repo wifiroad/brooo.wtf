@@ -16,6 +16,7 @@
 }
 
 body {
+    cursor: url('oncurr.png') 16 16, auto;
     font-family: 'Space Grotesk', sans-serif;
     background-color: var(--bg0);
     background-image: radial-gradient(circle at 20% 20%, rgba(254, 128, 25, 0.05) 0%, transparent 25%),
@@ -26,6 +27,10 @@ body {
     justify-content: center;
     align-items: center;
     padding: 2rem 1rem;
+}
+
+a:hover {
+    cursor: url('oncurr.png') 16 16, pointer;
 }
 
 .glass-card {
