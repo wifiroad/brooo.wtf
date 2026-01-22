@@ -6,12 +6,6 @@ async function fetchDiscordStatus() {
     const avatarImg = document.getElementById('discord-avatar');
     const statusDot = document.getElementById('discord-status');
 
-    try {
-        if (DISCORD_ID === '678546996268630056') {
-            nameEl.innerText = "Set ID in Code";
-            activityEl.innerText = "Waiting for User ID...";
-            return;
-        }
 
         const response = await fetch(`https://api.lanyard.rest/v1/users/${DISCORD_ID}`);
         const data = await response.json();
