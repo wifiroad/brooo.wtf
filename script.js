@@ -1,4 +1,3 @@
-<script>
     const DISCORD_ID = '678546996268630056'; 
 
     async function fetchDiscordStatus() {
@@ -34,5 +33,3 @@
 
     fetchDiscordStatus();
     setInterval(fetchDiscordStatus, 15000);
-</sc
-    ript>
