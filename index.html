@@ -21,23 +21,17 @@
     </style>
 </head>
 <body>
-
+<script src="script.js"></script>
     <div class="container">
         
         <!-- Profile Row Header -->
         <div class="flex items-center gap-5 justify-center mb-6">
-            <!-- Profile Picture Container with Lanyard Status Dot -->
             <div class="relative">
-                <img id="discord-avatar" src="https://files.catbox.moe/u8czlm.png" alt="Profile Picture" class="w-24 h-24 rounded-full object-cover border-2 border-white/20">
-                <!-- Status Dot Indicator -->
-                <span id="discord-status" class="absolute bottom-1 right-1 w-4 h-4 rounded-full border-2 border-black status-offline"></span>
+                <img id="discord-avatar" class="w-24 h-24 rounded-full object-cover border-2 border-white/20">
+                <span id="discord-st" class="absolute bottom-1 right-1 w-4 h-4 rounded-full border-2 border-black status-offline"></span>
             </div>
-            
-            <!-- Double Nickname Stack -->
             <div class="text-left">
-                <!-- Main Display Name -->
                 <h1 id="discord-name" class="header-text text-4xl font-bold leading-tight">four</h1>
-                <!-- Live Activity / Handle Fallback -->
                 <p id="discord-activity" class="text-gray-400 text-sm tracking-wide mt-1">@oldyou</p>
             </div>
         </div>
@@ -60,48 +54,5 @@
                 </svg></a>
         </div>
     </div>
-
-    <!-- Lanyard Worker Script -->
-    <script>
-        const DISCORD_ID = '678546996268630056'; 
-
-        async function fetchDiscordStatus() {
-            try {
-                const response = await fetch(`https://api.lanyard.rest/v1/users/${DISCORD_ID}`);
-                const result = await response.json();
-
-                if (result.success) {
-                    const { discord_user, discord_status, activities } = result.data;
-
-                    // Dynamically overrides fallback if your custom Discord global_name is found
-                    document.getElementById('discord-name').innerText = discord_user.global_name || discord_user.username;
-                    
-                    // Fetch profile avatar
-                    document.getElementById('discord-avatar').src = discord_user.avatar 
-                        ? `https://cdn.discordapp.com/avatars/${discord_user.id}/${discord_user.avatar}.png?size=256`
-                        : `https://ui-avatars.com/api/?name=${discord_user.username}&background=3c3836&color=ebdbb2`;
-
-                    // Handle status indicator bubble classes
-                    document.getElementById('discord-status').className = `absolute bottom-1 right-1 w-4 h-4 rounded-full border-2 border-black status-${discord_status}`;
-
-                    // Update live activity subtitle context or return fallback handle
-                    let act = "@oldyou"; 
-                    if (activities && activities.length > 0) {
-                        const game = activities.find(x => x.type !== 4);
-                        const custom = activities.find(x => x.type === 4);
-                        if (game) {
-                            act = `${game.type === 2 ? 'Listening to' : 'Playing'} ${game.name}`;
-                        } else if (custom) {
-                            act = custom.state || custom.name;
-                        }
-                    }
-                    document.getElementById('discord-activity').innerText = act;
-                }
-            } catch (e) {}
-        }
-
-        fetchDiscordStatus();
-        setInterval(fetchDiscordStatus, 15000);
-    </script>
 </body>
 </html>
